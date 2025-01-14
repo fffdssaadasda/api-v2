@@ -22,6 +22,10 @@ const projectSchema = new Schema({
   link: {
     type: String,
   },
+  previewImage: {
+    type: String,
+    default: "",
+  },
 });
 
 const projectModel = new model("Project", projectSchema);
