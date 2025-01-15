@@ -29,5 +29,11 @@ const projectSchema = new Schema({
 });
 
 const projectModel = new model("Project", projectSchema);
+projectSchema.pre("findOneAndUpdate", (next) => {
+  const api_url = "https://portfolioapi-production-84ea.up.railway.app";
+  this.previewImage = `${api_url}/images/${this.images[0]}`;
+  console.log(this.previewImage);
 
+  next();
+});
 export default projectModel;

@@ -3,7 +3,9 @@ import {
   createProject,
   deleteAllProjects,
   deleteProject,
+  editProject,
   getAllProjects,
+  geteProject,
 } from "../controller/projectController.js";
 // deleteAllProjects,
 // deleteProject,
@@ -39,5 +41,15 @@ router
   .post(upload.fields([{ name: "images" }]), createProject)
   .get(getAllProjects)
   .delete(deleteAllProjects);
-router.route("/:projectId").delete(deleteProject);
+router
+  .route("/:projectId")
+  .delete(deleteProject)
+  .get(geteProject)
+  .patch(
+    upload.fields([{ name: "images" }]),
+    (req, res, next) => {
+      next();
+    },
+    editProject
+  );
 export default router;

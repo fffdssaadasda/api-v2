@@ -22,6 +22,14 @@ export const getAllProjects = async (req, res, next) => {
     return next(err);
   }
 };
+export const geteProject = async (req, res, next) => {
+  try {
+    const project = await Project.findById(req.params.projectId);
+    res.status(200).json(project);
+  } catch (err) {
+    return next(err);
+  }
+};
 
 export const deleteProject = async (req, res, next) => {
   try {
@@ -39,4 +47,18 @@ export const deleteAllProjects = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
+};
+export const editProject = async (req, res, next) => {
+  const editedProject = await Project.findByIdAndUpdate(
+    req.params.projectId,
+    req.body,
+    { new: true }
+  );
+  const files = req.files;
+  editedProject.images = [];
+  if (req.files) {
+    editedProject.images = files?.images?.map((file) => file.filename);
+    await editedProject.save();
+  }
+  res.status(200).json(editedProject);
 };
