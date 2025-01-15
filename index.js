@@ -3,12 +3,8 @@ import mongoose from "mongoose";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import ProjectRouter from "./routes/projectRoutes.js";
-// const mongoose = require("mongoose");
-// const express = require("express");
-// const dotenv = require("dotenv");
-// const ProjectRouter = require("./routes/projectRoutes.js");
-// const cors = require("cors");
+import ProjectRouter from "./routes/projectRoutes.js"; 
+
 dotenv.config({});
 export const app = express();
 const dataBase = process.env.DB.replace(
