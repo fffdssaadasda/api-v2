@@ -49,16 +49,21 @@ export const deleteAllProjects = async (req, res, next) => {
   }
 };
 export const editProject = async (req, res, next) => {
-  const editedProject = await Project.findByIdAndUpdate(
-    req.params.projectId,
-    req.body,
-    { new: true }
-  );
-  const files = req.files;
-  editedProject.images = [];
-  if (req.files) {
-    editedProject.images = files?.images?.map((file) => file.filename);
-    await editedProject.save();
+  try {
+    const editedProject = await Project.findByIdAndUpdate(
+      req.params.projectId,
+      req.body,
+      { new: true }
+    );
+
+    res.status(200).json(editedProject);
+  }catch (err) {
+    return next(err)
   }
-  res.status(200).json(editedProject);
+  // const files = req.files;
+  // editedProject.images = [];
+  // if (req.files) {
+  //   editedProject.images = files?.images?.map((file) => file.filename);
+  //   await editedProject.save();
+  // }
 };

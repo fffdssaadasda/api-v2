@@ -46,10 +46,10 @@ router
   .delete(deleteProject)
   .get(geteProject)
   .patch(
-    upload.fields([{ name: "images" }]),
-    (req, res, next) => {
-      next();
-    },
+    // upload.fields([{ name: "images" }]),
+    // (req, res, next) => {
+    //   next();
+    // },
     editProject
   );
 export default router;
