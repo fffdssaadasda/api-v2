@@ -13,6 +13,12 @@ const dataBase = process.env.DB.replace(
 );
 /* Packages And Varibles */
 
+app.use(
+  cors({
+    credentials: true,
+    origin: "*",
+  })
+);
 /* DB Connection */
 mongoose
   .connect(dataBase)
@@ -24,12 +30,6 @@ mongoose
 /* Middlewares */
 app.use(express.json());
 app.use(express.static("static"));
-app.use(
-  cors({
-    credentials: true,
-    origin: "*",
-  })
-);
 app.use("/projects", ProjectRouter);
 //- Global Error Handling Middleware
 app.use((err, req, res, next) => {
